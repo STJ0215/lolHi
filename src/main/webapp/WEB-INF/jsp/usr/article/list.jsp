@@ -11,5 +11,14 @@
 
     <body>
         <h1>게시물 리스트</h1>
+
+        <c:forEach var="article" items="${articles}">
+            id : ${article.id} <br>
+            regDate : ${article.regDate} <br>
+            updateDate : ${article.updateDate} <br>
+            title : ${article.title} <br>
+            body : ${article.body} <br>
+            <hr>
+        </c:forEach>
     </body>
 </html>
