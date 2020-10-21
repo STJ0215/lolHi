@@ -37,9 +37,14 @@ public class ArticleController {
 		return "usr/article/detail";
 	}
 	
+	@RequestMapping("/usr/article/write")
+	public String showWrite() {
+		return "usr/article/write";
+	}
+	
 	@RequestMapping("/usr/article/doWrite")
 	@ResponseBody
-	public String  doWrite(@RequestParam Map<String, Object> param) {
+	public String doWrite(@RequestParam Map<String, Object> param) {
 		int id = articleService.writeArticle(param);
 		
 		return String.format("<script> alert('%d번 게시물이 생성되었습니다.'); location.replace('/usr/article/detail?id=%d'); </script>", id, id);
@@ -47,7 +52,7 @@ public class ArticleController {
 	
 	@RequestMapping("/usr/article/doModify")
 	@ResponseBody
-	public String  doModify(int id, String title, String body) {
+	public String doModify(int id, String title, String body) {
 		articleService.modifyArticle(id, title, body);
 		
 		return String.format("<script> alert('%d번 게시물이 수정되었습니다.'); location.replace('/usr/article/detail?id=%d'); </script>", id, id);
@@ -55,7 +60,7 @@ public class ArticleController {
 	
 	@RequestMapping("/usr/article/doDelete")
 	@ResponseBody
-	public String  doDelete(int id) {
+	public String doDelete(int id) {
 		articleService.deleteArticleById(id);
 		
 		return String.format("<script> alert('%d번 게시물이 삭제되었습니다.'); location.replace('/usr/article/list'); </script>", id);
