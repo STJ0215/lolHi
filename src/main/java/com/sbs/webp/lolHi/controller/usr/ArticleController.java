@@ -5,7 +5,6 @@ import java.util.List;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.webp.lolHi.dto.Article;
 
@@ -13,8 +12,7 @@ import com.sbs.webp.lolHi.dto.Article;
 @Controller
 public class ArticleController {
 	@RequestMapping("/usr/article/list")
-	@ResponseBody
-	List<Article> showList() {
+	public String showList() {
 		List<Article> articles = new ArrayList<>();
 		Article article1 = new Article(1, "2020-10-17 15:00:00", "2020-10-17 18:00:00", "제목1", "내용1");
 		Article article2 = new Article(2, "2020-10-18 15:00:00", "2020-10-18 18:00:00", "제목2", "내용2");
@@ -22,6 +20,6 @@ public class ArticleController {
 		articles.add(article1);
 		articles.add(article2);
 
-		return articles;
+		return "usr/article/list";
 	}
 }
