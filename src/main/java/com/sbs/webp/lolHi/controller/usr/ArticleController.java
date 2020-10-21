@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.webp.lolHi.dto.Article;
 import com.sbs.webp.lolHi.service.ArticleService;
@@ -32,5 +33,13 @@ public class ArticleController {
 		model.addAttribute("article", article);
 		
 		return "usr/article/detail";
+	}
+	
+	@RequestMapping("/usr/article/doDelete")
+	@ResponseBody
+	public String  doDelete(int id) {
+		articleService.deleteArticleById(id);
+		
+		return String.format("<script> alert('%d번 게시물이 삭제되었습니다.'); location.replace('/usr/article/list'); </script>", id);
 	}
 }
