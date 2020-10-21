@@ -8,16 +8,16 @@
         <meta charset="UTF-8">
         <title>게시물 리스트</title>
     </head>
-
+    
     <body>
         <h1>게시물 리스트</h1>
-
+        
         <c:forEach var="article" items="${articles}">
-            id : ${article.id} <br>
-            regDate : ${article.regDate} <br>
-            updateDate : ${article.updateDate} <br>
-            title : ${article.title} <br>
-            body : ${article.body} <br>
+            ID : ${article.id} <br>
+            등록일 : ${article.regDate} <br>
+            수정일 : ${article.updateDate} <br>
+            제목 : ${article.title} <br>
+            내용 : ${article.body} <br>
             <hr>
         </c:forEach>
     </body>
