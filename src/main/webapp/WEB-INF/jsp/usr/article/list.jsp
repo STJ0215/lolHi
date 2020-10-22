@@ -12,6 +12,8 @@
     <body>
         <h1>게시물 리스트</h1>
         
+        <div>총 게시물 갯수 : ${totalCount}</div>
+        <hr>
         <c:forEach var="article" items="${articles}">
             ID : <a href="detail?id=${article.id}">${article.id}</a> <br>
             등록일 : ${article.regDate} <br>

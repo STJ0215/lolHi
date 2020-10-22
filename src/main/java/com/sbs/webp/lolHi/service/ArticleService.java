@@ -56,4 +56,8 @@ public class ArticleService {
 	public void deleteArticleById(int id) {
 		articleDao.deleteArticleById(id);
 	}
+
+	public int getTotalCount() {
+		return articleDao.getTotalCount();
+	}
 }

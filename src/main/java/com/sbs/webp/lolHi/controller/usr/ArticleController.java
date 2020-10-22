@@ -23,6 +23,9 @@ public class ArticleController {
 	public String showList(Model model, @RequestParam Map<String, Object> param) {
 		List<Article> articles = articleService.getArticles(param);
 		
+		int totalCount = articleService.getTotalCount();
+		
+		model.addAttribute("totalCount", totalCount);
 		model.addAttribute("articles", articles);
 		
 		return "usr/article/list";
