@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
     
 <!DOCTYPE html>
 <html>
@@ -23,5 +23,9 @@
                 작성 : <input type="submit" value="작성"/>
             </div>
         </form>
+        <br>
+        <div>
+            <a href="list">리스트</a>
+        </div>
     </body>
 </html>
