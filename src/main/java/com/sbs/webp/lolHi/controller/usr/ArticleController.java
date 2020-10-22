@@ -24,8 +24,13 @@ public class ArticleController {
 		List<Article> articles = articleService.getArticles(param);
 		
 		int totalCount = articleService.getTotalCount();
+		int itemsCountInAPage = 10;
+		int totalPage = (int)Math.ceil(totalCount / (double)itemsCountInAPage);
+		
+		param.put("itemsCountInAPage", itemsCountInAPage);
 		
 		model.addAttribute("totalCount", totalCount);
+		model.addAttribute("totalPage", totalPage);
 		model.addAttribute("articles", articles);
 		
 		return "usr/article/list";
