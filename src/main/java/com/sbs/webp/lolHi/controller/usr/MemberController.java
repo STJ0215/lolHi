@@ -2,12 +2,15 @@ package com.sbs.webp.lolHi.controller.usr;
 
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sbs.webp.lolHi.dto.Member;
 import com.sbs.webp.lolHi.service.MemberService;
 import com.sbs.webp.lolHi.util.Util;
 
@@ -16,6 +19,34 @@ import com.sbs.webp.lolHi.util.Util;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+	
+	@RequestMapping("usr/member/login")
+	public String showLogin() {
+		return "usr/member/login";
+	}
+	
+	@RequestMapping("usr/member/doLogin")
+	@ResponseBody
+	public String doLogin(String loginId, String loginPw, HttpSession session) {
+		
+		if (loginId.length() == 0) {
+			return String.format("<script> alert('로그인 아이디를 입력해 주세요.'); history.back(); </script>");
+		}
+		
+		Member member = memberService.getMemberByLoginId(loginId);
+		
+		if (member == null) {
+			return String.format("<script> alert('%s은(는) 존재하지 않는 로그인 아이디 입니다.'); history.back(); </script>", loginId);
+		}
+		
+		if (member.getLoginPw().equals(loginPw) == false) {
+			return String.format("<script> alert('로그인 비밀번호가 일치하지 않습니다.'); history.back(); </script>");
+		}
+		
+		session.setAttribute("loginedMemberId", member.getId());
+		
+		return String.format("<script> alert('%s님 환영합니다.'); location.replace('/usr/article/list'); </script>", member.getName());
+	}
 	
 	@RequestMapping("usr/member/join")
 	public String showJoin() {

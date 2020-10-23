@@ -10,6 +10,8 @@
     </head>
     
     <body>
+        [${sessionScope}]
+        
         <h1>게시물 리스트</h1>
         
         <div>총 게시물 갯수 : ${totalCount}</div>
