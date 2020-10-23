@@ -20,34 +20,6 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping("usr/member/login")
-	public String showLogin() {
-		return "usr/member/login";
-	}
-	
-	@RequestMapping("usr/member/doLogin")
-	@ResponseBody
-	public String doLogin(String loginId, String loginPw, HttpSession session) {
-		
-		if (loginId.length() == 0) {
-			return String.format("<script> alert('로그인 아이디를 입력해 주세요.'); history.back(); </script>");
-		}
-		
-		Member member = memberService.getMemberByLoginId(loginId);
-		
-		if (member == null) {
-			return String.format("<script> alert('%s은(는) 존재하지 않는 로그인 아이디 입니다.'); history.back(); </script>", loginId);
-		}
-		
-		if (member.getLoginPw().equals(loginPw) == false) {
-			return String.format("<script> alert('로그인 비밀번호가 일치하지 않습니다.'); history.back(); </script>");
-		}
-		
-		session.setAttribute("loginedMemberId", member.getId());
-		
-		return String.format("<script> alert('%s님 환영합니다.'); location.replace('/usr/article/list'); </script>", member.getName());
-	}
-	
 	@RequestMapping("usr/member/join")
 	public String showJoin() {
 		return "usr/member/join";
@@ -71,5 +43,40 @@ public class MemberController {
 		int id = memberService.join(param);
 		
 		return String.format("<script> alert('%d번 회원이 생성되었습니다.'); location.replace('/usr/article/list'); </script>", id);
+	}
+	
+	@RequestMapping("usr/member/login")
+	public String showLogin() {
+		return "usr/member/login";
+	}
+	
+	@RequestMapping("usr/member/doLogin")
+	@ResponseBody
+	public String doLogin(String loginId, String loginPw, HttpSession session) {
+		if (loginId.length() == 0) {
+			return String.format("<script> alert('로그인 아이디를 입력해 주세요.'); history.back(); </script>");
+		}
+		
+		Member member = memberService.getMemberByLoginId(loginId);
+		
+		if (member == null) {
+			return String.format("<script> alert('%s은(는) 존재하지 않는 로그인 아이디 입니다.'); history.back(); </script>", loginId);
+		}
+		
+		if (member.getLoginPw().equals(loginPw) == false) {
+			return String.format("<script> alert('로그인 비밀번호가 일치하지 않습니다.'); history.back(); </script>");
+		}
+		
+		session.setAttribute("loginedMemberId", member.getId());
+		
+		return String.format("<script> alert('%s님 환영합니다.'); location.replace('/usr/article/list'); </script>", member.getName());
+	}
+	
+	@RequestMapping("usr/member/doLogout")
+	@ResponseBody
+	public String doLogout(HttpSession session) {		
+		session.removeAttribute("loginedMemberId");
+		
+		return String.format("<script> location.replace('/usr/article/list'); </script>");
 	}
 }
