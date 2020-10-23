@@ -3,6 +3,16 @@ DROP DATABASE IF EXISTS lolHi;
 CREATE DATABASE lolHi;
 USE lolHi;
 
+# 회원 테이블 생성
+CREATE TABLE `member` (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    loginId CHAR(20) NOT NULL,
+    loginPw CHAR(100) NOT NULL,
+    `name` CHAR(100) NOT NULL
+);
+
 # 게시물 테이블 생성
 CREATE TABLE article (
     id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
@@ -205,4 +215,11 @@ updateDate = NOW(),
 title = '제목32',
 `body` = '내용32';
 
-SELECT * FROM article;
+INSERT INTO article
+SET regDate = NOW(),
+updateDate = NOW(),
+title = 'title',
+`body` = 'body';
+
+SELECT * FROM `member`;
+SELECT * FROM article ORDER BY id DESC;
