@@ -18,9 +18,16 @@ CREATE TABLE `member` (
 INSERT INTO `member`
 SET regDate = NOW(),
 updateDate = NOW(),
-loginId = 'test',
-loginPw = 'test',
-`name` = 'test';
+loginId = 'test1',
+loginPw = 'test1',
+`name` = 'test1';
+
+INSERT INTO `member`
+SET regDate = NOW(),
+updateDate = NOW(),
+loginId = 'test2',
+loginPw = 'test2',
+`name` = 'test2';
 
 
 # 게시물 테이블 생성
@@ -231,6 +238,13 @@ updateDate = NOW(),
 title = 'title',
 `body` = 'body';
 
+# 게시물 테이블에 memberId 칼럼 추가
+ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER updateDate;
+# 기존 게시물의 작성자가 1번 회원이라고 정한다
+UPDATE article SET memberId = 1 WHERE memberId = 0;
 
+# 회원 테이블 조회
 SELECT * FROM `member`;
+
+# 게시물 테이블 조회(내림차순)
 SELECT * FROM article ORDER BY id DESC;
