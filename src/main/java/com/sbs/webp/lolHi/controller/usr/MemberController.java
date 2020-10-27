@@ -9,7 +9,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sbs.webp.lolHi.dto.Member;
 import com.sbs.webp.lolHi.service.MemberService;
@@ -27,7 +26,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("/usr/member/doJoin")
-	public String doJoin(@RequestParam Map<String ,Object> param, Model model) {
+	public String doJoin(Model model, @RequestParam Map<String ,Object> param) {
 		String loginId = Util.getAsStr(param.get("loginId"), "");
 		
 		if (loginId.length() == 0) {
@@ -60,7 +59,7 @@ public class MemberController {
 	}
 	
 	@RequestMapping("usr/member/doLogin")
-	public String doLogin(String loginId, String loginPw, HttpSession session, Model model) {
+	public String doLogin(HttpSession session, Model model, String loginId, String loginPw) {
 		if (loginId.length() == 0) {
 			model.addAttribute("msg", "로그인 아이디를 입력해주세요.");
 			model.addAttribute("historyBack", true);
@@ -93,7 +92,20 @@ public class MemberController {
 	}
 	
 	@RequestMapping("usr/member/doLogout")
-	public String doLogout(HttpSession session, Model model) {		
+	public String doLogout(HttpSession session, Model model) {
+		int loginedMemberId = 0;
+		
+		if (session.getAttribute("loginedMemberId") != null) {
+			loginedMemberId = (int)session.getAttribute("loginedMemberId");
+		}
+		
+		if (loginedMemberId == 0) {
+			model.addAttribute("msg", "로그인 후 이용해주세요.");
+			model.addAttribute("replaceUri", "/usr/member/login");
+			
+			return "common/redirect";
+		}
+		
 		session.removeAttribute("loginedMemberId");
 		
 		model.addAttribute("replaceUri", "/usr/article/list");
