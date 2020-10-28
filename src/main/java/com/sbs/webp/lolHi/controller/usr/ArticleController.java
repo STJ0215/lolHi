@@ -3,6 +3,7 @@ package com.sbs.webp.lolHi.controller.usr;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -165,14 +166,11 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("/usr/article/doDelete")
-	public String doDelete(HttpSession session, Model model, int id) {
-		int loginedMemberId = 0;
+	public String doDelete(HttpServletRequest req, Model model, int id) {
+		boolean isLogined = (boolean)req.getAttribute("isLogined");
+		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
 		
-		if (session.getAttribute("loginedMemberId") != null) {
-			loginedMemberId = (int)session.getAttribute("loginedMemberId");
-		}
-		
-		if (loginedMemberId == 0) {
+		if (isLogined == false) {
 			model.addAttribute("msg", "로그인 후 이용해주세요.");
 			model.addAttribute("replaceUri", "/usr/member/login");
 			
