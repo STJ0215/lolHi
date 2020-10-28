@@ -109,6 +109,7 @@ public class MemberController {
 	@RequestMapping("usr/member/doModify")
 	public String doModify(HttpServletRequest req, Model model, @RequestParam Map<String, Object> param) {
 		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
+		
 		param.put("id", loginedMemberId);
 		
 		// 해킹방지

@@ -24,6 +24,7 @@
             </div>
         </form>
         <br>
+        
         <div>
             <a onclick="history.back();">뒤로가기</a>
         </div>

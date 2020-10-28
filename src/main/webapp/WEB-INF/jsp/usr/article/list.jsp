@@ -5,7 +5,9 @@
 <c:set var="title" value="게시물 리스트"/>
 <%@ include file="../part/head.jspf"%>
         
-        <div>총 게시물 갯수 : ${totalCount}</div>
+        <div>
+            총 게시물 갯수 : ${totalCount}
+        </div>
         <div>
             <a href="write">글쓰기</a>
         </div>
@@ -18,7 +20,8 @@
             제목 : <a href="detail?id=${article.id}">${article.title}</a> <br>
             <br>
             작업 : <a href="modify?id=${article.id}">수정</a>
-                   <a href="doDelete?id=${article.id}" onclick="if (confirm('삭제하시겠습니까?') == false) return false;">삭제</a>
+                   <a href="doDelete?id=${article.id}" 
+                       onclick="if (confirm('삭제하시겠습니까?') == false) return false;">삭제</a>
             <hr>
         </c:forEach>
         
@@ -34,7 +37,9 @@
             }
         </style>
         
-        <span>페이지 : </span>
+        <span>
+            페이지 : 
+        </span>
         <div>
             <c:set var="goFirstBtnNeedToShow" value="${page > pageMenuArmSize + 1}"/>
             <c:set var="goLastBtnNeedToShow" value="true"/>

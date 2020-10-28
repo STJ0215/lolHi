@@ -43,6 +43,7 @@
             <div>
                 패스워드 : <input type="password" maxlength="30" placeholder="로그인 패스워드를 입력해 주세요." name="loginPw"/>
             </div>
+            
             <div>
                 로그인 : <input type="submit" value="로그인"/>
             </div>

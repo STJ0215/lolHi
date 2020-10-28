@@ -65,6 +65,7 @@
             <div>
                 이름 : <input type="text" maxlength="30" placeholder="이름을 입력해 주세요." name="name"/>
             </div>
+            
             <div>
                 가입 : <input type="submit" value="가입"/>
             </div>
