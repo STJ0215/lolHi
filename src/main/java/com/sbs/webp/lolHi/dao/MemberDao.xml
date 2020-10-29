@@ -21,12 +21,14 @@
 	</insert>
 	
 	<select id="getMemberByLoginId" resultType="Member">
-		SELECT * FROM member
+		SELECT *
+		FROM member
 		WHERE loginId = #{loginId}
 	</select>
 	
 	<select id="getMemberById" resultType="Member">
-		SELECT * FROM member
+		SELECT *
+		FROM member
 		WHERE id = #{id}
 	</select>
 	

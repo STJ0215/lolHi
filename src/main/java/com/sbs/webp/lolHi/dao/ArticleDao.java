@@ -11,9 +11,9 @@ import com.sbs.webp.lolHi.dto.Article;
 
 @Mapper
 public interface ArticleDao {
-	List<Article> getArticles(Map<String, Object> param);
+	List<Article> getForPrintArticles(Map<String, Object> param);
 
-	Article getArticleById(@Param("id") int id);
+	Article getForPrintArticleById(@Param("id") int id);
 	
 	void writeArticle(Map<String, Object> param);
 	

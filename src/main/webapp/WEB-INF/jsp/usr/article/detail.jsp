@@ -15,6 +15,9 @@
             수정일 : ${article.updateDate}
         </div>
         <div>
+            작성자 : ${article.extra.writer}
+        </div>
+        <div>
             제목 : ${article.title}
         </div>
         <div>

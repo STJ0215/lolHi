@@ -24,7 +24,7 @@ public class ArticleController {
 	
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, @RequestParam Map<String, Object> param) {
-		List<Article> articles = articleService.getArticles(param);
+		List<Article> articles = articleService.getForPrintArticles(param);
 		
 		int totalCount = articleService.getTotalCount();
 		int itemsCountInAPage = 10;
@@ -58,7 +58,7 @@ public class ArticleController {
 	
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(Model model, int id) {
-		Article article = articleService.getArticleById(id);
+		Article article = articleService.getForPrintArticleById(id);
 		
 		model.addAttribute("article", article);
 		
@@ -90,7 +90,7 @@ public class ArticleController {
 	public String showModify(HttpServletRequest req, Model model, int id) {
 		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
 		
-		Article article = articleService.getArticleById(id);
+		Article article = articleService.getForPrintArticleById(id);
 		
 		if (article.getMemberId() != loginedMemberId) {
 			model.addAttribute("msg", "수정 권한이 없습니다.");
@@ -108,7 +108,7 @@ public class ArticleController {
 	public String doModify(HttpServletRequest req, Model model, int id, String title, String body) {
 		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
 		
-		Article article = articleService.getArticleById(id);
+		Article article = articleService.getForPrintArticleById(id);
 		
 		if (article.getMemberId() != loginedMemberId) {
 			model.addAttribute("msg", "수정 권한이 없습니다.");
@@ -129,7 +129,7 @@ public class ArticleController {
 	public String doDelete(HttpServletRequest req, Model model, int id) {
 		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
 		
-		Article article = articleService.getArticleById(id);
+		Article article = articleService.getForPrintArticleById(id);
 		
 		if (article.getMemberId() != loginedMemberId) {
 			model.addAttribute("msg", "삭제 권한이 없습니다.");
