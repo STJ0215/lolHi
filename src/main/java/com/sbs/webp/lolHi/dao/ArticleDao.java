@@ -21,5 +21,5 @@ public interface ArticleDao {
 
 	void deleteArticleById(@Param("id") int id);
 
-	int getTotalCount();
+	int getTotalCount(Map<String, Object> param);
 }

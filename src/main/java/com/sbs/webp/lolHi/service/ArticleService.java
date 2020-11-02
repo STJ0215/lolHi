@@ -57,7 +57,7 @@ public class ArticleService {
 		articleDao.deleteArticleById(id);
 	}
 
-	public int getTotalCount() {
-		return articleDao.getTotalCount();
+	public int getTotalCount(Map<String, Object> param) {
+		return articleDao.getTotalCount(param);
 	}
 }
