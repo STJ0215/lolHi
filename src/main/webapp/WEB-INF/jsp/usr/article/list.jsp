@@ -6,11 +6,20 @@
 <%@ include file="../part/head.jspf"%>
         
         <div>
+            <a href="write">글쓰기</a>
+        </div>
+        <div>
             총 게시물 갯수 : ${totalCount}
         </div>
         <div>
-            <a href="write">글쓰기</a>
+            <form>
+                <div>
+                    <input type="text" placeholder="검색어 입력" name="searchKeyword" value="${param.searchKeyword}">
+                    <input type="submit" value="검색">
+                </div>
+            </form>
         </div>
+        
         <hr>
         
         <c:forEach var="article" items="${articles}">
@@ -51,7 +60,7 @@
             
             <c:forEach var="i" begin="${pageMenuStart}" end="${pageMenuEnd}">
                 <c:set var="className" value="${i == page ? 'selected' : ''}"/>
-                <a class="${className}" href="?page=${i}&searchKeyword=${param.searchKeyword}">${i}</a>
+                <a href="?page=${i}&searchKeyword=${param.searchKeyword}" class="${className}">${i}</a>
                 
                 <c:if test="${i == totalPage}">
                     <c:set var="goLastBtnNeedToShow" value="false"/>
