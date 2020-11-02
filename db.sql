@@ -75,14 +75,6 @@ UPDATE article SET memberId = 1 WHERE memberId = 0;
 
 
 
-# 회원 테이블 조회
-SELECT * FROM `member`;
-
-# 게시물 테이블 조회(내림차순)
-SELECT * FROM article ORDER BY id DESC;
-
-
-
 # 게시물 데이터 추가
 INSERT INTO article SET
 regDate = NOW(),
@@ -90,3 +82,18 @@ updateDate = NOW(),
 memberId = 2,
 title = '제목5',
 `body` = '내용5';
+
+INSERT INTO article SET
+regDate = NOW(),
+updateDate = NOW(),
+memberId = IF(RAND() > 0.5, 2, 1),
+title = CONCAT('제목_', RAND()),
+`body` = CONCAT('내용_', RAND());
+
+
+
+# 회원 테이블 조회
+SELECT * FROM `member`;
+
+# 게시물 테이블 조회(내림차순)
+SELECT * FROM article ORDER BY id DESC;
