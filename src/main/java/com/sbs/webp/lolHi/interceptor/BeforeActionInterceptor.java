@@ -10,6 +10,7 @@ import org.springframework.web.servlet.HandlerInterceptor;
 
 import com.sbs.webp.lolHi.dto.Member;
 import com.sbs.webp.lolHi.service.MemberService;
+import com.sbs.webp.lolHi.util.Util;
 
 
 @Component("beforeActionInterceptor")
@@ -36,6 +37,17 @@ public class BeforeActionInterceptor implements HandlerInterceptor {
 		request.setAttribute("isAjax", isAjax);
 		request.setAttribute("loginedMemberId", loginedMemberId);
 		request.setAttribute("loginedMember", loginedMember);
+		
+		String currentUri = request.getRequestURI();
+		
+		if (request.getQueryString() != null) {
+			currentUri += "?" + request.getQueryString();
+		}
+		
+		String encodedCurrentUri = Util.getUriEncoded(currentUri);
+		
+		request.setAttribute("currentUri", currentUri);
+		request.setAttribute("encodedCurrentUri", encodedCurrentUri);
 		
 		return HandlerInterceptor.super.preHandle(request, response, handler);
 	}

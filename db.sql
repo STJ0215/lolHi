@@ -105,6 +105,40 @@ CREATE TABLE reply (
 
 
 
+# 댓글 데이터 추가
+INSERT INTO reply SET
+regDate = NOW(),
+updateDate = NOW(),
+relTypeCode = 'article',
+relId = 1,
+memberId = 1,
+`body` = '댓글1';
+
+INSERT INTO reply SET
+regDate = NOW(),
+updateDate = NOW(),
+relTypeCode = 'article',
+relId = 1,
+memberId = 1,
+`body` = '댓글2';
+
+INSERT INTO reply SET
+regDate = NOW(),
+updateDate = NOW(),
+relTypeCode = 'article',
+relId = 1,
+memberId = 2,
+`body` = '댓글3';
+
+INSERT INTO reply SET
+regDate = NOW(),
+updateDate = NOW(),
+relTypeCode = 'article',
+relId = 2,
+memberId = 2,
+`body` = '댓글4';
+
+
 # 회원 테이블 조회
 SELECT * FROM `member`;
 
