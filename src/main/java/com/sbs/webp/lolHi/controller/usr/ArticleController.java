@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -13,7 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sbs.webp.lolHi.dto.Article;
+import com.sbs.webp.lolHi.dto.Reply;
 import com.sbs.webp.lolHi.service.ArticleService;
+import com.sbs.webp.lolHi.service.ReplyService;
 import com.sbs.webp.lolHi.util.Util;
 
 
@@ -21,6 +22,8 @@ import com.sbs.webp.lolHi.util.Util;
 public class ArticleController {
 	@Autowired
 	private ArticleService articleService;
+	@Autowired
+	private ReplyService replyService;
 	
 	@RequestMapping("/usr/article/list")
 	public String showList(Model model, @RequestParam Map<String, Object> param) {
@@ -59,8 +62,10 @@ public class ArticleController {
 	@RequestMapping("/usr/article/detail")
 	public String showDetail(Model model, int id) {
 		Article article = articleService.getForPrintArticleById(id);
+		List<Reply> replies = replyService.getForPrintReplies("article", id);
 		
 		model.addAttribute("article", article);
+		model.addAttribute("replies", replies);
 		
 		return "usr/article/detail";
 	}
