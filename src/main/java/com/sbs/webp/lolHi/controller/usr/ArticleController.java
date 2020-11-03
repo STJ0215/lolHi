@@ -96,7 +96,7 @@ public class ArticleController {
 		
 		Article article = articleService.getForPrintArticleById(id);
 		
-		if (article.getMemberId() != loginedMemberId) {
+		if (loginedMemberId != article.getMemberId()) {
 			model.addAttribute("msg", "수정 권한이 없습니다.");
 			model.addAttribute("historyBack", true);
 			
@@ -114,7 +114,7 @@ public class ArticleController {
 		
 		Article article = articleService.getForPrintArticleById(id);
 		
-		if (article.getMemberId() != loginedMemberId) {
+		if (loginedMemberId != article.getMemberId()) {
 			model.addAttribute("msg", "수정 권한이 없습니다.");
 			model.addAttribute("historyBack", true);
 			
@@ -135,7 +135,7 @@ public class ArticleController {
 		
 		Article article = articleService.getForPrintArticleById(id);
 		
-		if (article.getMemberId() != loginedMemberId) {
+		if (loginedMemberId != article.getMemberId()) {
 			model.addAttribute("msg", "삭제 권한이 없습니다.");
 			model.addAttribute("historyBack", true);
 			

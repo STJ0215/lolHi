@@ -62,6 +62,9 @@
             <div>
                 내용 : ${reply.body}
             </div>
+            <div>
+                <a href="/usr/reply/doDelete?id=${reply.id}">삭제</a>
+            </div>
             <hr>
         </c:forEach>
 <%@ include file="../part/foot.jspf"%>

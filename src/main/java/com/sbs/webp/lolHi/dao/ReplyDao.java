@@ -13,5 +13,9 @@ import com.sbs.webp.lolHi.dto.Reply;
 public interface ReplyDao {
 	void writeReply(Map<String, Object> param);
 
-	List<Reply> getForPrintReplies(@Param("relTypeCode") String relTypeCode, @Param("relId") int id);
+	List<Reply> getForPrintReplies(@Param("relTypeCode") String relTypeCode, @Param("relId") int relId);
+
+	Reply getForPrintReplyById(@Param("id") int id);
+
+	void deleteReplyById(@Param("id") int id);
 }
