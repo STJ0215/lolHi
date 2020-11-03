@@ -21,7 +21,7 @@ public class ReplyController {
 	private ReplyService replyService;
 	
 	@RequestMapping("/usr/reply/doWrite")
-	public String doWrite(HttpServletRequest req, Model model, @RequestParam Map<String, Object> param) {
+	public String doWrite(HttpServletRequest req, Model model, @RequestParam Map<String, Object> param, String replaceUri) {
 		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
 		param.put("memberId", loginedMemberId);
 		
@@ -29,8 +29,12 @@ public class ReplyController {
 		String relTypeCode = (String)param.get("relTypeCode");
 		int relId = Util.getAsInt(param.get("relId"));
 		
+		if (replaceUri == null || replaceUri.length() == 0) {
+			replaceUri = String.format("/usr/%s/detail?id=%d", relTypeCode, relId);
+		}
+		
 		model.addAttribute("msg", String.format("%d번 댓글이 생성되었습니다.", id));
-		model.addAttribute("replaceUri", String.format("/usr/%s/detail?id=%d", relTypeCode, relId));
+		model.addAttribute("replaceUri", replaceUri);
 		
 		return "common/redirect";
 	}
