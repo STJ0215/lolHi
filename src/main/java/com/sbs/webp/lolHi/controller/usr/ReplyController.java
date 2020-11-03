@@ -36,7 +36,7 @@ public class ReplyController {
 	}
 	
 	@RequestMapping("/usr/reply/doDelete")
-	public String doDelete(HttpServletRequest req, Model model, int id) {
+	public String doDelete(HttpServletRequest req, Model model, int id, String replaceUri) {
 		int loginedMemberId = (int)req.getAttribute("loginedMemberId"); 
 		
 		Reply reply = replyService.getForPrintReplyById(id);
@@ -55,10 +55,14 @@ public class ReplyController {
 			return "common/redirect";
 		}
 		
+		if (replaceUri == null || replaceUri.length() == 0) {
+			replaceUri = String.format("/usr/%s/detail?id=%d",reply.getRelTypeCode(), reply.getRelId());
+		}
+		
 		replyService.deleteReplyById(id);
 		
 		model.addAttribute("msg", String.format("%d번 댓글이 삭제되었습니다.", id));
-		model.addAttribute("replaceUri", String.format("/usr/%s/detail?id=%d", reply.getRelTypeCode(), reply.getRelId()));
+		model.addAttribute("replaceUri", replaceUri);
 		
 		return "common/redirect";
 	}
