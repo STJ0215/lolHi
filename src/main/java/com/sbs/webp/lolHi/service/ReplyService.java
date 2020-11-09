@@ -15,21 +15,21 @@ import com.sbs.webp.lolHi.util.Util;
 public class ReplyService {
 	@Autowired
 	private ReplyDao replyDao;
-
-	public int writeReply(Map<String, Object> param) {
-		replyDao.writeReply(param);
-		
-		int id = Util.getAsInt(param.get("id"));
-		
-		return id;
-	}
-
+	
 	public List<Reply> getForPrintReplies(String relTypeCode, int relId) {
 		return replyDao.getForPrintReplies(relTypeCode, relId);
 	}
 
 	public Reply getForPrintReplyById(int id) {
 		return replyDao.getForPrintReplyById(id);
+	}
+	
+	public int writeReply(Map<String, Object> param) {
+		replyDao.writeReply(param);
+		
+		int id = Util.getAsInt(param.get("id"));
+		
+		return id;
 	}
 
 	public void deleteReplyById(int id) {

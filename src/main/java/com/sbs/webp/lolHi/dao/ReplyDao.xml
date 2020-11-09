@@ -3,6 +3,23 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sbs.webp.lolHi.dao.ReplyDao">	
+	<select id="getForPrintReplies" resultMap="reply">
+		SELECT RE.*,
+		M.name AS extra__writer
+		FROM reply AS RE
+		INNER JOIN member AS M
+		ON RE.memberId = M.id
+		WHERE RE.relTypeCode = #{relTypeCode}
+		AND RE.relId = #{relId}
+		ORDER BY RE.id DESC
+	</select>
+	
+	<select id="getForPrintReplyById" resultType="Reply">
+		SELECT *
+		FROM reply
+		WHERE id = #{id}
+	</select>
+	
 	<insert id="writeReply" useGeneratedKeys="true" keyProperty="id">
 		INSERT INTO reply
 		<set>
@@ -22,23 +39,6 @@
 			</if>
 		</set>
 	</insert>
-	
-	<select id="getForPrintReplies" resultMap="reply">
-		SELECT RE.*,
-		M.name AS extra__writer
-		FROM reply AS RE
-		INNER JOIN member AS M
-		ON RE.memberId = M.id
-		WHERE RE.relTypeCode = #{relTypeCode}
-		AND RE.relId = #{relId}
-		ORDER BY RE.id DESC
-	</select>
-	
-	<select id="getForPrintReplyById" resultType="Reply">
-		SELECT *
-		FROM reply
-		WHERE id = #{id}
-	</select>
 	
 	<delete id="deleteReplyById">
 		DELETE FROM reply
