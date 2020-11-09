@@ -27,9 +27,11 @@
         
         <div>
             <a href="${listUrl}">게시물 목록</a>
-            <a href="modify?id=${article.id}">수정</a>
-            <a href="doDelete?id=${article.id}" 
-                onclick="if (confirm('삭제하시겠습니까?') == false) return false;">삭제</a>
+            <c:if test="${loginedMemberId == article.memberId}">
+                <a href="modify?id=${article.id}">수정</a>
+                <a href="doDelete?id=${article.id}"
+                    onclick="if (confirm('삭제하시겠습니까?') == false) return false;">삭제</a>
+            </c:if>
         </div>
         
         <h2>댓글 작성</h2>
@@ -64,8 +66,10 @@
                 내용 : ${reply.body}
             </div>
             <div>
-                <a href="/usr/reply/modify?id=${reply.id}&replaceUri=${encodedCurrentUri}">수정</a>
-                <a href="/usr/reply/doDelete?id=${reply.id}&replaceUri=${encodedCurrentUri}">삭제</a>
+                <c:if test="${loginedMemberId == reply.memberId}">
+                    <a href="/usr/reply/modify?id=${reply.id}&replaceUri=${encodedCurrentUri}">수정</a>
+                    <a href="/usr/reply/doDelete?id=${reply.id}&replaceUri=${encodedCurrentUri}">삭제</a>
+                </c:if>
             </div>
             <hr>
         </c:forEach>
