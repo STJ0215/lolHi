@@ -12,10 +12,12 @@ import com.sbs.webp.lolHi.dto.Reply;
 @Mapper
 public interface ReplyDao {
 	void writeReply(Map<String, Object> param);
-
+	
 	List<Reply> getForPrintReplies(@Param("relTypeCode") String relTypeCode, @Param("relId") int relId);
-
+	
 	Reply getForPrintReplyById(@Param("id") int id);
-
+	
+	void modifyReply(Map<String, Object> param);
+	
 	void deleteReplyById(@Param("id") int id);
 }
