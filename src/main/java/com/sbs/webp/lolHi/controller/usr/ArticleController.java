@@ -63,8 +63,10 @@ public class ArticleController {
 	}
 	
 	@RequestMapping("/usr/article/detail")
-	public String showDetail(Model model, int id, String listUrl) {
-		Article article = articleService.getForPrintArticleById(id);
+	public String showDetail(HttpServletRequest req, Model model, int id, String listUrl) {
+		Member loginedMember = (Member)req.getAttribute("loginedMember");
+		
+		Article article = articleService.getForPrintArticleById(loginedMember, id);
 		List<Reply> replies = replyService.getForPrintReplies("article", id);
 		
 		if (listUrl == null) {
@@ -100,11 +102,11 @@ public class ArticleController {
 	
 	@RequestMapping("/usr/article/modify")
 	public String showModify(HttpServletRequest req, Model model, int id) {
-		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
+		Member loginedMember = (Member)req.getAttribute("loginedMember");
 		
-		Article article = articleService.getForPrintArticleById(id);
+		Article article = articleService.getForPrintArticleById(loginedMember, id);
 		
-		if (loginedMemberId != article.getMemberId()) {
+		if ((boolean)article.getExtra().get("actorCanModify") == false) {
 			model.addAttribute("msg", "수정 권한이 없습니다.");
 			model.addAttribute("historyBack", true);
 			
@@ -118,11 +120,11 @@ public class ArticleController {
 	
 	@RequestMapping("/usr/article/doModify")
 	public String doModify(HttpServletRequest req, Model model, int id, String title, String body) {
-		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
+		Member loginedMember = (Member)req.getAttribute("loginedMember");
 		
-		Article article = articleService.getForPrintArticleById(id);
+		Article article = articleService.getForPrintArticleById(loginedMember, id);
 		
-		if (loginedMemberId != article.getMemberId()) {
+		if ((boolean)article.getExtra().get("actorCanModify") == false) {
 			model.addAttribute("msg", "수정 권한이 없습니다.");
 			model.addAttribute("historyBack", true);
 			
@@ -139,11 +141,11 @@ public class ArticleController {
 	
 	@RequestMapping("/usr/article/doDelete")
 	public String doDelete(HttpServletRequest req, Model model, int id) {
-		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
+		Member loginedMember = (Member)req.getAttribute("loginedMember");
 		
-		Article article = articleService.getForPrintArticleById(id);
+		Article article = articleService.getForPrintArticleById(loginedMember, id);
 		
-		if (loginedMemberId != article.getMemberId()) {
+		if ((boolean)article.getExtra().get("actorCanDelete") == false) {
 			model.addAttribute("msg", "삭제 권한이 없습니다.");
 			model.addAttribute("historyBack", true);
 			
