@@ -68,8 +68,10 @@
                 내용 : ${reply.body}
             </div>
             <div>
-                <c:if test="${loginedMemberId == reply.memberId}">
+                <c:if test="${reply.extra.actorCanModify}">
                     <a href="/usr/reply/modify?id=${reply.id}&replaceUri=${encodedCurrentUri}">수정</a>
+                </c:if>
+                <c:if test="${reply.extra.actorCanDelete}">
                     <a href="/usr/reply/doDelete?id=${reply.id}&replaceUri=${encodedCurrentUri}">삭제</a>
                 </c:if>
             </div>
