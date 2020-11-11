@@ -7,6 +7,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
 import com.sbs.webp.lolHi.dto.Article;
+import com.sbs.webp.lolHi.dto.Board;
 
 
 @Mapper
@@ -22,4 +23,6 @@ public interface ArticleDao {
 	void deleteArticleById(@Param("id") int id);
 
 	int getTotalCount(Map<String, Object> param);
+
+	Board getBoardByCode(@Param("boardCode") String boardCode);
 }

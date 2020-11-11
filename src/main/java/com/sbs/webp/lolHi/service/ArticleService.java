@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import com.sbs.webp.lolHi.dao.ArticleDao;
 import com.sbs.webp.lolHi.dto.Article;
+import com.sbs.webp.lolHi.dto.Board;
 import com.sbs.webp.lolHi.dto.Member;
 import com.sbs.webp.lolHi.util.Util;
 
@@ -109,5 +110,9 @@ public class ArticleService {
 
 	public void deleteArticleById(int id) {
 		articleDao.deleteArticleById(id);
+	}
+
+	public Board getBoardByCode(String boardCode) {
+		return articleDao.getBoardByCode(boardCode);
 	}
 }
