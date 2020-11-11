@@ -15,20 +15,44 @@ CREATE TABLE `member` (
     `name` CHAR(100) NOT NULL
 );
 
-# 회원 데이터 생성
-INSERT INTO `member`
-SET regDate = NOW(),
+# 회원 데이터 추가
+INSERT INTO `member` SET
+regDate = NOW(),
 updateDate = NOW(),
 loginId = 'test1',
 loginPw = 'test1',
 `name` = 'test1';
 
-INSERT INTO `member`
-SET regDate = NOW(),
+INSERT INTO `member` SET
+regDate = NOW(),
 updateDate = NOW(),
 loginId = 'test2',
 loginPw = 'test2',
 `name` = 'test2';
+
+
+
+# 게시판 테이블 생성
+CREATE TABLE board (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    `name` CHAR(20) UNIQUE NOT NULL,
+    `code` CHAR(20) UNIQUE NOT NULL
+);
+
+# 게시판 데이터 추가
+INSERT INTO board SET
+regDate = NOW(),
+updateDate = NOW(),
+`name` = '공지사항',
+`code` = 'notice';
+
+INSERT INTO board SET
+regDate = NOW(),
+updateDate = NOW(),
+`name` = '자유게시판',
+`code` = 'free';
 
 
 
@@ -41,7 +65,7 @@ CREATE TABLE article (
     `body` TEXT NOT NULL
 );
 
-# 게시물 데이터 생성
+# 게시물 데이터 추가
 INSERT INTO article SET
 regDate = NOW(),
 updateDate = NOW(),
@@ -141,6 +165,9 @@ memberId = 2,
 
 # 회원 테이블 조회
 SELECT * FROM `member`;
+
+# 게시판 테이블 조회
+SELECT * FROM board;
 
 # 게시물 테이블 조회(내림차순)
 SELECT * FROM article ORDER BY id DESC;
