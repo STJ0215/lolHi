@@ -41,6 +41,8 @@ public class ArticleController {
 		
 		Member loginedMember = (Member)req.getAttribute("loginedMember");
 		
+		param.put("boardId", board.getId());
+		
 		List<Article> articles = articleService.getForPrintArticles(loginedMember, param);
 		
 		int totalCount = articleService.getTotalCount(param);
