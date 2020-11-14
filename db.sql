@@ -33,18 +33,18 @@ loginPw = 'test2',
 
 
 # 게시판 테이블 생성
-CREATE TABLE board (
-    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    regDate DATETIME NOT NULL,
-    updateDate DATETIME NOT NULL,
-    `name` CHAR(20) UNIQUE NOT NULL,
-    `code` CHAR(20) UNIQUE NOT NULL
+Create table board (
+    id int(10) unsigned not null primary key auto_increment,
+    regDate datetime not null,
+    updateDate datetime not null,
+    `name` char(20) unique not null,
+    `code` char(20) unique not null
 );
 
 # 게시판 데이터 추가
-INSERT INTO board SET
-regDate = NOW(),
-updateDate = NOW(),
+Insert into board set
+regDate = now(),
+updateDate = now(),
 `name` = '공지사항',
 `code` = 'notice';
 
@@ -93,9 +93,9 @@ title = '제목4',
 
 
 # 게시물 테이블에 memberId 칼럼 추가
-ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER updateDate;
+alter table article add column memberId int(10) unsigned not null after updateDate;
 # 기존 게시물의 작성자가 1번 회원이라고 정한다
-UPDATE article SET memberId = 1 WHERE memberId = 0;
+update article set memberId = 1 where memberId = 0;
 
 
 
@@ -116,23 +116,30 @@ title = CONCAT('제목_', RAND()),
 
 
 
+# 게시물 테이블에 boardId 칼럼 추가
+alter table article add column boardId int(10) unsigned not null after updateDate;
+update article set boardId = 1 where id <= 2;
+update article set boardId = 2 where id > 2;
+
+
+
 #댓글 테이블 생성
-CREATE TABLE reply (
-    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
-    regDate DATETIME NOT NULL,
-    updateDate DATETIME NOT NULL,
+create table reply (
+    id int(10) unsigned not null primary key auto_increment,
+    regDate datetime not null,
+    updateDate datetime not null,
     relTypeCode CHAR(50) NOT NULL, # 관련 데이터 타입
     relId INT(10) UNSIGNED NOT NULL, # 관련 ID
-    memberId INT(10) UNSIGNED NOT NULL,
-    `body` TEXT NOT NULL
+    memberId int(10) unsigned not null,
+    `body` text not null
 );
 
 
 
 # 댓글 데이터 추가
-INSERT INTO reply SET
-regDate = NOW(),
-updateDate = NOW(),
+insert into reply set
+regDate = now(),
+updateDate = now(),
 relTypeCode = 'article',
 relId = 1,
 memberId = 1,
@@ -167,10 +174,10 @@ memberId = 2,
 SELECT * FROM `member`;
 
 # 게시판 테이블 조회
-SELECT * FROM board;
+Select * from board;
 
 # 게시물 테이블 조회(내림차순)
-SELECT * FROM article ORDER BY id DESC;
+SELECT * From article order by id desc;
 
 # 댓글 테이블 조회
 SELECT * FROM reply;
