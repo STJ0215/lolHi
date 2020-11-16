@@ -59,6 +59,11 @@
             <c:set var="goFirstBtnNeedToShow" value="${page > pageMenuArmSize + 1}"/>
             <c:set var="goLastBtnNeedToShow" value="true"/>
             
+            
+            <c:if test="${0 == totalPage}">
+                <c:set var="goFirstBtnNeedToShow" value="false" />
+            </c:if>
+            
             <c:if test="${goFirstBtnNeedToShow}">
                 <a href="?page=1&searchKeyword=${param.searchKeyword}">◀◀</a>
             </c:if>
@@ -71,6 +76,10 @@
                     <c:set var="goLastBtnNeedToShow" value="false"/>
                 </c:if>
             </c:forEach>
+            
+            <c:if test="${0 == totalPage}">
+                <c:set var="goLastBtnNeedToShow" value="false" />
+            </c:if>
             
             <c:if test="${goLastBtnNeedToShow}">
                 <a href="?page=${totalPage}&searchKeyword=${param.searchKeyword}">▶▶</a>
