@@ -48,6 +48,9 @@
 		<set>
 			regDate = NOW(),
 			updateDate = NOW(),
+			<if test="boardId != null">
+				boardId = #{boardId},
+			</if>
 			<if test="memberId != null">
 				memberId = #{memberId},
 			</if>

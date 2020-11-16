@@ -6,9 +6,6 @@
 <%@ include file="../part/head.jspf"%>
         
         <div>
-            <a href="write">글쓰기</a>
-        </div>
-        <div>
             총 게시물 갯수 : ${totalCount}
         </div>
         <div>

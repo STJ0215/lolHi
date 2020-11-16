@@ -95,15 +95,18 @@ public class ArticleController {
 		return "usr/article/detail";
 	}
 	
-	@RequestMapping("/usr/article/write")
+	@RequestMapping("/usr/article-{boardCode}/write")
 	public String showWrite(HttpServletRequest req, Model model) {
 		
 		return "usr/article/write";
 	}
 	
-	@RequestMapping("/usr/article/doWrite")
-	public String doWrite(HttpServletRequest req, Model model, @RequestParam Map<String, Object> param) {
+	@RequestMapping("/usr/article-{boardCode}/doWrite")
+	public String doWrite(HttpServletRequest req, Model model, @PathVariable("boardCode") String boardCode, @RequestParam Map<String, Object> param) {
+		Board board = articleService.getBoardByCode(boardCode);
 		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
+		
+		param.put("boardId", board.getId());
 		param.put("memberId", loginedMemberId);
 		
 		int id = articleService.writeArticle(param);
