@@ -32,19 +32,24 @@ loginPw = 'test2',
 
 
 
+# 회원 테이블에 email 칼럼 추가
+ALTER TABLE `member` ADD COLUMN email CHAR(100) AFTER `name`;
+# 기존 회원의 email 정보 추가
+UPDATE `member` SET email ='stj960215@gmail.com';
+
 # 게시판 테이블 생성
-Create table board (
-    id int(10) unsigned not null primary key auto_increment,
-    regDate datetime not null,
-    updateDate datetime not null,
-    `name` char(20) unique not null,
-    `code` char(20) unique not null
+CREATE TABLE board (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    `name` CHAR(20) UNIQUE NOT NULL,
+    `code` CHAR(20) UNIQUE NOT NULL
 );
 
 # 게시판 데이터 추가
-Insert into board set
-regDate = now(),
-updateDate = now(),
+INSERT INTO board SET
+regDate = NOW(),
+updateDate = NOW(),
 `name` = '공지사항',
 `code` = 'notice';
 
@@ -93,9 +98,9 @@ title = '제목4',
 
 
 # 게시물 테이블에 memberId 칼럼 추가
-alter table article add column memberId int(10) unsigned not null after updateDate;
+ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER updateDate;
 # 기존 게시물의 작성자가 1번 회원이라고 정한다
-update article set memberId = 1 where memberId = 0;
+UPDATE article SET memberId = 1 WHERE memberId = 0;
 
 
 
@@ -117,29 +122,29 @@ title = CONCAT('제목_', RAND()),
 
 
 # 게시물 테이블에 boardId 칼럼 추가
-alter table article add column boardId int(10) unsigned not null after updateDate;
-update article set boardId = 1 where id <= 2;
-update article set boardId = 2 where id > 2;
+ALTER TABLE article ADD COLUMN boardId INT(10) UNSIGNED NOT NULL AFTER updateDate;
+UPDATE article SET boardId = 1 WHERE id <= 2;
+UPDATE article SET boardId = 2 WHERE id > 2;
 
 
 
 #댓글 테이블 생성
-create table reply (
-    id int(10) unsigned not null primary key auto_increment,
-    regDate datetime not null,
-    updateDate datetime not null,
+CREATE TABLE reply (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
     relTypeCode CHAR(50) NOT NULL, # 관련 데이터 타입
     relId INT(10) UNSIGNED NOT NULL, # 관련 ID
-    memberId int(10) unsigned not null,
-    `body` text not null
+    memberId INT(10) UNSIGNED NOT NULL,
+    `body` TEXT NOT NULL
 );
 
 
 
 # 댓글 데이터 추가
-insert into reply set
-regDate = now(),
-updateDate = now(),
+INSERT INTO reply SET
+regDate = NOW(),
+updateDate = NOW(),
 relTypeCode = 'article',
 relId = 1,
 memberId = 1,
@@ -174,10 +179,10 @@ memberId = 2,
 SELECT * FROM `member`;
 
 # 게시판 테이블 조회
-Select * from board;
+SELECT * FROM board;
 
 # 게시물 테이블 조회(내림차순)
-SELECT * From article order by id desc;
+SELECT * FROM article ORDER BY id DESC;
 
 # 댓글 테이블 조회
 SELECT * FROM reply;
