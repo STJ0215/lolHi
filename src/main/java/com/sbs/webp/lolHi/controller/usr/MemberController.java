@@ -21,7 +21,7 @@ public class MemberController {
 	@Autowired
 	private MemberService memberService;
 	
-	@RequestMapping("usr/member/join")
+	@RequestMapping("/usr/member/join")
 	public String showJoin() {
 		return "usr/member/join";
 	}
@@ -64,12 +64,12 @@ public class MemberController {
 		return "common/redirect";
 	}
 	
-	@RequestMapping("usr/member/login")
+	@RequestMapping("/usr/member/login")
 	public String showLogin() {
 		return "usr/member/login";
 	}
 	
-	@RequestMapping("usr/member/doLogin")
+	@RequestMapping("/usr/member/doLogin")
 	public String doLogin(HttpSession session, Model model, String loginId, String loginPw) {
 		if (loginId.length() == 0) {
 			model.addAttribute("msg", "로그인 아이디를 입력해주세요.");
@@ -102,7 +102,7 @@ public class MemberController {
 		return "common/redirect";
 	}
 	
-	@RequestMapping("usr/member/doLogout")
+	@RequestMapping("/usr/member/doLogout")
 	public String doLogout(HttpSession session, Model model) {
 		session.removeAttribute("loginedMemberId");
 		
@@ -111,12 +111,34 @@ public class MemberController {
 		return "common/redirect";
 	}
 	
-	@RequestMapping("usr/member/modify")
+	@RequestMapping("/usr/member/findLoginId")
+	public String showFindLoginId() {
+		return "usr/member/findLoginId";
+	}
+	
+	@RequestMapping("/usr/member/doFindLoginId")
+	public String doFindLoginId(Model model, String name, String email) {
+		Member member = memberService.getMemberByNameAndEmail(name, email);
+		
+		if (member == null) {
+			model.addAttribute("msg", "존재하지 않는 회원입니다.");
+			model.addAttribute("historyBack", true);
+			
+			return "common/redirect";
+		}
+		
+		model.addAttribute("msg", String.format("회원님의 아이디 : %s, 가입일 : %s", member.getLoginId(), member.getRegDate()));
+		model.addAttribute("replaceUri", "/usr/member/login");
+		
+		return "common/redirect";
+	}
+	
+	@RequestMapping("/usr/member/modify")
 	public String showModify() {
 		return "usr/member/modify";
 	}
 	
-	@RequestMapping("usr/member/doModify")
+	@RequestMapping("/usr/member/doModify")
 	public String doModify(HttpServletRequest req, Model model, @RequestParam Map<String, Object> param) {
 		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
 		
