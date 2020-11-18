@@ -186,3 +186,7 @@ SELECT * FROM article ORDER BY id DESC;
 
 # 댓글 테이블 조회
 SELECT * FROM reply;
+
+# 현재 패스워드를 암호화
+UPDATE `member` SET
+loginPw = SHA2(loginPw, 256);
