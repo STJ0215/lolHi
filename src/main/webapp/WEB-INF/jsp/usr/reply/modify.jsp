@@ -18,7 +18,7 @@
                 수정일 : ${reply.updateDate}
             </div>
             <div>
-                내용 : <input type="text" maxlength="30" placeholder="내용을 입력해 주세요." 
+                내용 : <input type="text" maxlength="30" placeholder="내용을 입력해주세요." 
                             name="body" value="${reply.body}"/>
             </div>
             

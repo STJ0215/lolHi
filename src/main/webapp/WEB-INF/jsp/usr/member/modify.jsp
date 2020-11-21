@@ -16,7 +16,7 @@
                 로그인 아이디 : ${loginedMember.loginId}
             </div>
             <div>
-                이름 : <input type="test" maxlength="30" placeholder="이름을 입력해 주세요." 
+                이름 : <input type="text" maxlength="30" placeholder="이름을 입력해주세요." 
                     name="name" value="${loginedMember.name}"/>
             </div>
             <div>

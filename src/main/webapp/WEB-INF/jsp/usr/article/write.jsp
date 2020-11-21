@@ -7,10 +7,10 @@
         
         <form action="doWrite" method="POST">
             <div>
-                제목 : <input type="text" maxlength="30" placeholder="제목을 입력해 주세요." name="title"/>
+                제목 : <input type="text" maxlength="30" placeholder="제목을 입력해주세요." name="title"/>
             </div>
             <div>
-                내용 : <input type="text" maxlength="30" placeholder="내용을 입력해 주세요." name="body"/>
+                내용 : <input type="text" maxlength="30" placeholder="내용을 입력해주세요." name="body"/>
             </div>
             <div>
                 작성 : <input type="submit" value="작성"/>

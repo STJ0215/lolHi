@@ -18,7 +18,7 @@
                 
                 form.loginId.value = form.loginId.value.trim();                
                 if (form.loginId.value.length == 0) {
-                    alert('로그인 아이디를 입력해 주세요.');
+                    alert('로그인 아이디를 입력해주세요.');
                     form.loginId.focus();
 
                     return;
@@ -26,7 +26,7 @@
 
                 form.loginPw.value = form.loginPw.value.trim();
                 if (form.loginPw.value.length == 0) {
-                    alert('로그인 패스워드를 입력해 주세요.');
+                    alert('로그인 패스워드를 입력해주세요.');
                     form.loginPw.focus();
 
                     return;
@@ -41,10 +41,10 @@
         
         <form action="doLogin" method="POST" onsubmit="loginFormSubmit(this); return false;">
             <div>
-                아이디 : <input type="text" maxlength="30" placeholder="로그인 아이디를 입력해 주세요." name="loginId"/>
+                아이디 : <input type="text" maxlength="30" placeholder="로그인 아이디를 입력해주세요." name="loginId"/>
             </div>
             <div>
-                패스워드 : <input type="password" maxlength="30" placeholder="로그인 패스워드를 입력해 주세요." name="loginPw"/>
+                패스워드 : <input type="password" maxlength="30" placeholder="로그인 패스워드를 입력해주세요." name="loginPw"/>
             </div>
             
             <div>
