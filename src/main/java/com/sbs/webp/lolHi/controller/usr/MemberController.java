@@ -53,14 +53,14 @@ public class MemberController {
 
 		if (isJoinAvailableNameAndEmail == false) {
 			model.addAttribute("msg", String.format("이미 가입된 회원의 정보입니다."));
-			model.addAttribute("replaceUri", "/usr/member/findLoginId");
+			model.addAttribute("redirectUri", "/usr/member/findLoginId");
 			return "common/redirect";
 		}
 		
 		int id = memberService.join(param);
 		
 		model.addAttribute("msg", "회원 가입이 완료되었습니다");
-		model.addAttribute("replaceUri", "/usr/article-free/list");
+		model.addAttribute("redirectUri", "/usr/article-free/list");
 		
 		return "common/redirect";
 	}
@@ -89,7 +89,7 @@ public class MemberController {
 		}
 		
 		if (member.getLoginPw().equals(loginPw) == false) {
-			model.addAttribute("msg", "로그인 비밀번호가 일치하지 않습니다.");
+			model.addAttribute("msg", "로그인 패스워드가 일치하지 않습니다.");
 			model.addAttribute("historyBack", true);
 			
 			return "common/redirect";
@@ -98,7 +98,7 @@ public class MemberController {
 		session.setAttribute("loginedMemberId", member.getId());
 		
 		model.addAttribute("msg", String.format("%s님 환영합니다.", member.getName()));
-		model.addAttribute("replaceUri", "/usr/article-free/list");
+		model.addAttribute("redirectUri", "/usr/article-free/list");
 		
 		return "common/redirect";
 	}
@@ -107,7 +107,7 @@ public class MemberController {
 	public String doLogout(HttpSession session, Model model) {
 		session.removeAttribute("loginedMemberId");
 		
-		model.addAttribute("replaceUri", "/usr/article-free/list");
+		model.addAttribute("redirectUri", "/usr/article-free/list");
 		
 		return "common/redirect";
 	}
@@ -129,7 +129,7 @@ public class MemberController {
 		}
 		
 		model.addAttribute("msg", String.format("회원님의 아이디 : %s, 가입일 : %s", member.getLoginId(), member.getRegDate()));
-		model.addAttribute("replaceUri", "/usr/member/login");
+		model.addAttribute("redirectUri", "/usr/member/login");
 		
 		return "common/redirect";
 	}
@@ -160,7 +160,7 @@ public class MemberController {
 		ResultData setTempPasswordAndNotifyRsData = memberService.setTempPasswordAndNotify(member);
 		
 		model.addAttribute("msg", setTempPasswordAndNotifyRsData.getMsg());
-		model.addAttribute("replaceUri", "/usr/member/login");
+		model.addAttribute("redirectUri", "/usr/member/login");
 		
 		return "common/redirect";
 	}
@@ -183,7 +183,7 @@ public class MemberController {
 		memberService.modify(param);
 		
 		model.addAttribute("msg", "수정되었습니다.");
-		model.addAttribute("replaceUri", "/usr/article-free/list");
+		model.addAttribute("redirectUri", "/usr/article-free/list");
 		
 		return "common/redirect";
 	}

@@ -22,7 +22,7 @@ public class ReplyController {
 	private ReplyService replyService;
 	
 	@RequestMapping("/usr/reply/doWrite")
-	public String doWrite(HttpServletRequest req, Model model, @RequestParam Map<String, Object> param, String replaceUri) {
+	public String doWrite(HttpServletRequest req, Model model, @RequestParam Map<String, Object> param, String redirectUri) {
 		int loginedMemberId = (int)req.getAttribute("loginedMemberId");
 		param.put("memberId", loginedMemberId);
 		
@@ -30,18 +30,18 @@ public class ReplyController {
 		String relTypeCode = (String)param.get("relTypeCode");
 		int relId = Util.getAsInt(param.get("relId"));
 		
-		if (replaceUri == null || replaceUri.length() == 0) {
-			replaceUri = String.format("/usr/%s/detail?id=%d", relTypeCode, relId);
+		if (redirectUri == null || redirectUri.length() == 0) {
+			redirectUri = String.format("/usr/%s/detail?id=%d", relTypeCode, relId);
 		}
 		
 		model.addAttribute("msg", String.format("%d번 댓글이 생성되었습니다.", id));
-		model.addAttribute("replaceUri", replaceUri);
+		model.addAttribute("redirectUri", redirectUri);
 		
 		return "common/redirect";
 	}
 	
 	@RequestMapping("/usr/reply/modify")
-	public String showModify(HttpServletRequest req, Model model, int id, String replaceUri) {
+	public String showModify(HttpServletRequest req, Model model, int id, String redirectUri) {
 		Member loginedMember = (Member)req.getAttribute("loginedMember"); 
 		
 		Reply reply = replyService.getForPrintReplyById(loginedMember, id);
@@ -60,8 +60,8 @@ public class ReplyController {
 			return "common/redirect";
 		}
 		
-		if (replaceUri == null || replaceUri.length() == 0) {
-			replaceUri = String.format("/usr/%s/detail?id=%d",reply.getRelTypeCode(), reply.getRelId());
+		if (redirectUri == null || redirectUri.length() == 0) {
+			redirectUri = String.format("/usr/%s/detail?id=%d",reply.getRelTypeCode(), reply.getRelId());
 		}
 
 		model.addAttribute("reply", reply);
@@ -70,7 +70,7 @@ public class ReplyController {
 	}
 	
 	@RequestMapping("/usr/reply/doModify")
-	public String doModify(HttpServletRequest req, Model model, @RequestParam Map<String, Object> param, int id, String replaceUri) {
+	public String doModify(HttpServletRequest req, Model model, @RequestParam Map<String, Object> param, int id, String redirectUri) {
 		Member loginedMember = (Member)req.getAttribute("loginedMember");
 		
 		Reply reply = replyService.getForPrintReplyById(loginedMember, id);
@@ -89,20 +89,20 @@ public class ReplyController {
 			return "common/redirect";
 		}
 		
-		if (replaceUri == null || replaceUri.length() == 0) {
-			replaceUri = String.format("/usr/%s/detail?id=%d",reply.getRelTypeCode(), reply.getRelId());
+		if (redirectUri == null || redirectUri.length() == 0) {
+			redirectUri = String.format("/usr/%s/detail?id=%d",reply.getRelTypeCode(), reply.getRelId());
 		}
 		
 		replyService.modifyReply(param);
 		
 		model.addAttribute("msg", String.format("%d번 댓글이 수정되었습니다.", id));
-		model.addAttribute("replaceUri", replaceUri);
+		model.addAttribute("redirectUri", redirectUri);
 		
 		return "common/redirect";
 	}
 	
 	@RequestMapping("/usr/reply/doDelete")
-	public String doDelete(HttpServletRequest req, Model model, int id, String replaceUri) {
+	public String doDelete(HttpServletRequest req, Model model, int id, String redirectUri) {
 		Member loginedMember = (Member)req.getAttribute("loginedMember"); 
 		
 		Reply reply = replyService.getForPrintReplyById(loginedMember, id);
@@ -121,14 +121,14 @@ public class ReplyController {
 			return "common/redirect";
 		}
 		
-		if (replaceUri == null || replaceUri.length() == 0) {
-			replaceUri = String.format("/usr/%s/detail?id=%d",reply.getRelTypeCode(), reply.getRelId());
+		if (redirectUri == null || redirectUri.length() == 0) {
+			redirectUri = String.format("/usr/%s/detail?id=%d",reply.getRelTypeCode(), reply.getRelId());
 		}
 		
 		replyService.deleteReplyById(id);
 		
 		model.addAttribute("msg", String.format("%d번 댓글이 삭제되었습니다.", id));
-		model.addAttribute("replaceUri", replaceUri);
+		model.addAttribute("redirectUri", redirectUri);
 		
 		return "common/redirect";
 	}

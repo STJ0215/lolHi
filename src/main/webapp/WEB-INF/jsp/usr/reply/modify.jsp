@@ -7,7 +7,7 @@
         
         <form action="doModify" method="POST">
             <input type="hidden" name="id" value="${reply.id}"/>
-            <input type="hidden" name="replaceUri" value="${param.replaceUri}"/>
+            <input type="hidden" name="redirectUri" value="${param.redirectUri}"/>
             <div>
                 ID : ${reply.id}
             </div>
@@ -29,6 +29,6 @@
         <br>
         
         <div>
-            <a href="${param.replaceUri}">돌아가기</a>
+            <a href="${param.redirectUri}">돌아가기</a>
         </div>
 <%@ include file="../part/foot.jspf"%>

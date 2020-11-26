@@ -40,7 +40,7 @@
         <h2>댓글 작성</h2>
         
         <form action="/usr/reply/doWrite" method="POST">
-            <input type="hidden" name="replaceUri" value="${currentUri}">
+            <input type="hidden" name="redirectUri" value="${currentUri}">
             <input type="hidden" name="relTypeCode" value="article">
             <input type="hidden" name="relId" value="${param.id}">
             <div>
@@ -70,10 +70,10 @@
             </div>
             <div>
                 <c:if test="${reply.extra.actorCanModify}">
-                    <a href="/usr/reply/modify?id=${reply.id}&replaceUri=${encodedCurrentUri}">수정</a>
+                    <a href="/usr/reply/modify?id=${reply.id}&redirectUri=${encodedCurrentUri}">수정</a>
                 </c:if>
                 <c:if test="${reply.extra.actorCanDelete}">
-                    <a href="/usr/reply/doDelete?id=${reply.id}&replaceUri=${encodedCurrentUri}">삭제</a>
+                    <a href="/usr/reply/doDelete?id=${reply.id}&redirectUri=${encodedCurrentUri}">삭제</a>
                 </c:if>
             </div>
             <hr>

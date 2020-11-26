@@ -117,7 +117,7 @@ public class ArticleController {
 		int id = articleService.writeArticle(param);
 		
 		model.addAttribute("msg", String.format("%d번 게시물이 생성되었습니다.", id));
-		model.addAttribute("replaceUri", String.format("/usr/article-%s/detail?id=%d", boardCode, id));
+		model.addAttribute("redirectUri", String.format("/usr/article-%s/detail?id=%d", boardCode, id));
 		
 		return "common/redirect";
 	}
@@ -158,7 +158,7 @@ public class ArticleController {
 		articleService.modifyArticle(id, title, body);
 		
 		model.addAttribute("msg", String.format("%d번 게시물이 수정되었습니다.", id));
-		model.addAttribute("replaceUri", String.format("/usr/article-%s/detail?id=%d", boardCode, id));
+		model.addAttribute("redirectUri", String.format("/usr/article-%s/detail?id=%d", boardCode, id));
 		
 		return "common/redirect";
 	}
@@ -179,7 +179,7 @@ public class ArticleController {
 		articleService.deleteArticleById(id);
 		
 		model.addAttribute("msg", String.format("%d번 게시물이 삭제되었습니다.", id));
-		model.addAttribute("replaceUri", String.format("/usr/article-%s/list", boardCode));
+		model.addAttribute("redirectUri", String.format("/usr/article-%s/list", boardCode));
 		
 		return "common/redirect";
 	}

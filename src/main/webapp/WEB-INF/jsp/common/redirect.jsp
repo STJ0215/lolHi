@@ -16,10 +16,10 @@
         history.back();
     }
 
-    var replaceUri = '${replaceUri}';
-    replaceUri = replaceUri.trim();
+    var redirectUri = '${redirectUri}';
+    redirectUri = redirectUri.trim();
 
-    if (replaceUri) {
-        location.replace(replaceUri);
+    if (redirectUri) {
+        location.replace(redirectUri);
     }
 </script>
