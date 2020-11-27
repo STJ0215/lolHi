@@ -30,12 +30,16 @@ loginId = 'test2',
 loginPw = 'test2',
 `name` = 'test2';
 
-
-
 # 회원 테이블에 email 칼럼 추가
 ALTER TABLE `member` ADD COLUMN email CHAR(100) AFTER `name`;
 # 기존 회원의 email 정보 추가
 UPDATE `member` SET email ='stj960215@gmail.com';
+
+# 기존 패스워드 암호화
+UPDATE `member` SET
+loginPw = SHA2(loginPw, 256);
+
+
 
 # 게시판 테이블 생성
 CREATE TABLE board (
@@ -95,14 +99,10 @@ updateDate = NOW(),
 title = '제목4',
 `body` = '내용4';
 
-
-
 # 게시물 테이블에 memberId 칼럼 추가
 ALTER TABLE article ADD COLUMN memberId INT(10) UNSIGNED NOT NULL AFTER updateDate;
 # 기존 게시물의 작성자가 1번 회원이라고 정한다
 UPDATE article SET memberId = 1 WHERE memberId = 0;
-
-
 
 # 게시물 데이터 추가
 INSERT INTO article SET
@@ -118,8 +118,6 @@ updateDate = NOW(),
 memberId = IF(RAND() > 0.5, 2, 1),
 title = CONCAT('제목_', RAND()),
 `body` = CONCAT('내용_', RAND());
-
-
 
 # 게시물 테이블에 boardId 칼럼 추가
 ALTER TABLE article ADD COLUMN boardId INT(10) UNSIGNED NOT NULL AFTER updateDate;
@@ -138,8 +136,6 @@ CREATE TABLE reply (
     memberId INT(10) UNSIGNED NOT NULL,
     `body` TEXT NOT NULL
 );
-
-
 
 # 댓글 데이터 추가
 INSERT INTO reply SET
@@ -175,6 +171,31 @@ memberId = 2,
 `body` = '댓글4';
 
 
+
+# 부가정보 테이블 생성
+CREATE TABLE attr (
+    id INT(10) UNSIGNED NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    regDate DATETIME NOT NULL,
+    updateDate DATETIME NOT NULL,
+    `relTypeCode` CHAR(20) NOT NULL,
+    `relId` INT(10) UNSIGNED NOT NULL,
+    `typeCode` CHAR(30) NOT NULL,
+    `type2Code` CHAR(30) NOT NULL,
+    `value` TEXT NOT NULL
+);
+
+# attr 유니크 인덱스 걸기
+## 변수찾는 속도 최적화
+ALTER TABLE `attr` ADD UNIQUE INDEX (`relTypeCode`, `relId`, `typeCode`, `type2Code`); 
+
+## 특정 조건을 만족하는 회원 또는 게시물(기타 데이터)를 빠르게 찾기 위해서
+ALTER TABLE `attr` ADD INDEX (`relTypeCode`, `typeCode`, `type2Code`);
+
+# attr에 만료날짜 추가
+ALTER TABLE `attr` ADD COLUMN `expireDate` DATETIME NULL AFTER `value`;
+
+
+
 # 회원 테이블 조회
 SELECT * FROM `member`;
 
@@ -187,6 +208,5 @@ SELECT * FROM article ORDER BY id DESC;
 # 댓글 테이블 조회
 SELECT * FROM reply;
 
-# 현재 패스워드를 암호화
-UPDATE `member` SET
-loginPw = SHA2(loginPw, 256);
+# 부가정보 테이블 조회
+SELECT * FROM attr;
