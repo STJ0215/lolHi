@@ -11,17 +11,26 @@
                     <input type="hidden" name="checkLoginPwAuthCode" value="${param.checkLoginPwAuthCode}"/>
                     <div>
                         <div>
-                            <span>회원번호 : ${loginedMember.id}</span>
+                            <span>회원번호 :</span>
+                        </div>
+                        <div>
+                            <span>${loginedMember.id}</span>
                         </div>
                     </div>
                     <div>
                         <div>
-                            <span>가입일 : ${loginedMember.regDate}</span>
+                            <span>가입일 :</span>
+                        </div>
+                        <div>
+                            <span>${loginedMember.regDate}</span>
                         </div>
                     </div>
                     <div>
                         <div>
-                            <span>로그인 아이디 : ${loginedMember.loginId}</span>
+                            <span>로그인 아이디 :</span>
+                        </div>
+                        <div>
+                            <span>${loginedMember.loginId}</span>
                         </div>
                     </div>
                     <div>
