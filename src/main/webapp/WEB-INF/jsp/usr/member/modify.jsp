@@ -46,7 +46,9 @@
         </div>
         <br>
         
-        <div>
-            <a onclick="history.back();">뒤로가기</a>
+        <div class="sub-menu-bar con-min-width">
+            <div class="con">
+                <a onclick="history.back();">뒤로가기</a>
+            </div>
         </div>
 <%@ include file="../part/foot.jspf"%>
