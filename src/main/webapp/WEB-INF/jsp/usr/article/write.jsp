@@ -21,7 +21,7 @@
                             <span>내용 :</span>
                         </div>
                         <div>
-                            <input type="text" maxlength="30" placeholder="내용을 입력해주세요." name="body"/>
+                            <textarea maxlength="2000" placeholder="내용을 입력해주세요." name="body"></textarea>
                         </div>
                     </div>
                     <div>

@@ -180,4 +180,12 @@ html {
 .form-box-type-1 > div > div:last-child > input[type="submit"] {
 	
 }
+
+.form-box-type-1 > div > div:last-child > textarea {
+	display: block;
+	width: 100%;
+	min-height: 300px;
+	padding: 10px;
+	box-sizing: border-box;
+}
 /* 폼 박스 타입 1 끝 */

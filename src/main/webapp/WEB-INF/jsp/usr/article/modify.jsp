@@ -5,7 +5,7 @@
 <c:set var="title" value="${board.name} 게시물 수정"/>
 <%@ include file="../part/head.jspf"%>
         
-        <div class="write-box con-min-width">
+        <div class="modify-box con-min-width">
             <div class="con">
                 <form class="form-box-type-1" action="doModify" method="POST">
                     <input type="hidden" name="id" value="${article.id}"/>
@@ -47,8 +47,7 @@
                             <span>내용 :</span>
                         </div>
                         <div>
-                            <input type="text" maxlength="30" placeholder="내용을 입력해주세요." 
-                                    name="body" value="${article.body}"/>
+                            <textarea maxlength="2000" placeholder="내용을 입력해주세요." name="body">${article.body}</textarea>
                         </div>
                     </div>
                     
