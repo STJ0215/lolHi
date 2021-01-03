@@ -5,44 +5,106 @@
 <c:set var="title" value="${board.name}"/>
 <%@ include file="../part/head.jspf"%>
         
-        <div>
-            총 게시물 갯수 : ${totalCount}
-        </div>
-        <div>
-            <form>
-                <div>
-                    <input type="text" placeholder="검색어 입력" name="searchKeyword" value="${param.searchKeyword}">
-                    <input type="submit" value="검색">
-                </div>
-            </form>
-        </div>
-        
-        <hr>
-        
-        <c:forEach var="article" items="${articles}">
-            <c:set var="detailUrl" value="/usr/article-${board.code}/detail?id=${article.id}&listUrl=${encodedCurrentUri}"/>
-            <div>
-                ID : <a href="${detailUrl}">${article.id}</a> <br>
-                등록일 : ${article.regDate} <br>
-                수정일 : ${article.updateDate} <br>
-                작성자 : ${article.extra.writer} <br>
-                제목 : <a href="${detailUrl}">${article.title}</a> <br>
-                <br>
-                작업 :
-                <c:if test="${article.extra.actorCanModify}">
-                    <a href="modify?id=${article.id}">수정</a>
-                </c:if>
-                <c:if test="${article.extra.actorCanDelete}">
-                    <a href="doDelete?id=${article.id}" 
-                        onclick="if (confirm('삭제하시겠습니까?') == false) return false;">삭제</a>
-                </c:if>
+        <div class="articles-info-bar con-min-width">
+            <div class="con">
+                <span class="articles-info-bar__total-count">
+                    <span>총 게시물 갯수 :</span>
+                    <span>${totalCount}</span>
+                </span>
             </div>
-            <hr>
-        </c:forEach>
-        
-        <div>
-            <a href="write">게시물 작성</a>
         </div>
+        
+        <div class="con-min-width">
+            <div class="con">
+                <form class="form-box-type-1">
+                    <div>
+                        <div>
+                            <span>검색어</span>
+                        </div>
+                        <div>
+                            <input type="text" placeholder="검색어 입력" name="searchKeyword" value="${param.searchKeyword}">
+                        </div>
+                    </div>
+                    <div>
+                        <div>
+                            <span>검색</span>
+                        </div>
+                        <div>
+                            <input type="submit" value="검색">
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+        
+        <div class="article-list-box con-min-width">
+            <div class="con">
+                <div class="article-list-box__head">
+                    <div class="article-list-box__row">
+                        <div>
+                            <span>ID</span>
+                        </div>
+                        <div>
+                            <span>등록일</span>
+                        </div>
+                        <div>
+                            <span>수정일</span>
+                        </div>
+                        <div>
+                            <span>작성자</span>
+                        </div>
+                        <div>
+                            <span>제목</span>
+                        </div>
+                        
+                        <div>
+                            <span>작업</span>
+                        </div>                       
+                    </div>
+                </div>
+                <div class="article-list-box__body">
+                    <c:forEach var="article" items="${articles}">
+                        <c:set var="detailUrl" value="/usr/article-${board.code}/detail?id=${article.id}&listUrl=${encodedCurrentUri}"/>
+                        <div class="article-list-box__row">
+                            <div>
+                                <a href="${detailUrl}">${article.id}</a>
+                            </div>
+                            <div>
+                                <span>${article.regDate}</span>
+                            </div>
+                            <div>
+                                <span>${article.updateDate}</span>
+                            </div>
+                            <div>
+                                <span>${article.extra.writer}</span>
+                            </div>
+                            <div>
+                                <a href="${detailUrl}">${article.title}</a>
+                            </div>
+                            
+                            <div>
+                                <c:if test="${article.extra.actorCanModify}">
+                                    <a href="modify?id=${article.id}">수정</a>
+                                </c:if>
+                                <c:if test="${article.extra.actorCanDelete}">
+                                    <a href="doDelete?id=${article.id}" 
+                                        onclick="if (confirm('삭제하시겠습니까?') == false) return false;">삭제</a>
+                                </c:if>
+                            </div>                        
+                        </div>
+                    </c:forEach>
+                </div>
+            </div>
+        </div>
+        
+
+        
+        <div class="sub-menu-bar con-min-width">
+            <div class="con">
+                <a href="write">게시물 작성</a>
+            </div>
+        </div>
+        
         <br>
         
         <style>
@@ -52,10 +114,7 @@
             }
         </style>
         
-        <span>
-            페이지 : 
-        </span>
-        <div>
+        <div class="article-page-box con-min-width">
             <c:set var="goFirstBtnNeedToShow" value="${page > pageMenuArmSize + 1}"/>
             <c:set var="goLastBtnNeedToShow" value="true"/>
             
