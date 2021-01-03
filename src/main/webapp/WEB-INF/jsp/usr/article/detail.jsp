@@ -5,23 +5,54 @@
 <c:set var="title" value="${board.name} 게시물 상세 정보"/>
 <%@ include file="../part/head.jspf"%>
         
-        <div>
-            ID : ${article.id}
-        </div>
-        <div>
-            등록일 : ${article.regDate}
-        </div>
-        <div>
-            수정일 : ${article.updateDate}
-        </div>
-        <div>
-            작성자 : ${article.extra.writer}
-        </div>
-        <div>
-            제목 : ${article.title}
-        </div>
-        <div>
-            내용 : ${article.body}
+        <div class="article-detail-box con-min-width">
+            <div class="con">
+                <div>
+                    <div>
+                        <span>ID :</span>
+                    </div>
+                    <div>
+                        <span>${article.id}</span>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <span>등록일 :</span>
+                    </div>
+                    <div>
+                        <span>${article.regDate}</span>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <span>수정일 :</span>
+                    </div>
+                    <div>
+                        <span>${article.updateDate}</span>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <span>작성자 :</span>
+                    </div>
+                    <div>
+                        <span>${article.extra.writer}</span>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <span>제목 :</span>
+                    </div>
+                    <div>
+                        <span>${article.forPrintTitle}</span>
+                    </div>
+                </div>
+                <div>
+                    <div>
+                        <div>${article.forPrintBody}</div>
+                    </div>
+                </div>
+            </div>
         </div>
         <br>
         
