@@ -56,16 +56,18 @@
         </div>
         <br>
         
-        <div>
-            <a href="${listUrl}">게시물 목록</a>
-            <c:if test="${article.extra.actorCanModify}">
-                <a href="modify?id=${article.id}">수정</a>
-            </c:if>
-            <c:if test="${article.extra.actorCanDelete}">
-                <a href="doDelete?id=${article.id}"
-                    onclick="if (confirm('삭제하시겠습니까?') == false) return false;">삭제</a>
-            </c:if>
-            <a href="write">게시물 작성</a>
+        <div class="sub-menu-bar con-min-width">
+            <div class="con">
+                <a href="${listUrl}">게시물 목록</a>
+                <c:if test="${article.extra.actorCanModify}">
+                    <a href="modify?id=${article.id}">수정</a>
+                </c:if>
+                <c:if test="${article.extra.actorCanDelete}">
+                    <a href="doDelete?id=${article.id}"
+                        onclick="if (confirm('삭제하시겠습니까?') == false) return false;">삭제</a>
+                </c:if>
+                <a href="write">게시물 작성</a>
+            </div>
         </div>
         
         <h2>댓글 작성</h2>
