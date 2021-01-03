@@ -64,7 +64,7 @@
             }
         </script>
         
-        <div class="login-box con-min-width">
+        <div class="join-box con-min-width">
             <div class="con">
                 <form class="form-box-type-1" action="doJoin" method="POST" onsubmit="joinFormSubmit(this); return false;">
                     <div>
