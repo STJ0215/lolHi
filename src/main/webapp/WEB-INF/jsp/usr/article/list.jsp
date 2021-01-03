@@ -107,13 +107,6 @@
         
         <br>
         
-        <style>
-            .selected {
-                font-weight: bold;
-                color: red;
-            }
-        </style>
-        
         <div class="article-page-box con-min-width">
             <c:set var="goFirstBtnNeedToShow" value="${page > pageMenuArmSize + 1}"/>
             <c:set var="goLastBtnNeedToShow" value="true"/>
@@ -128,7 +121,7 @@
             </c:if>
             
             <c:forEach var="i" begin="${pageMenuStart}" end="${pageMenuEnd}">
-                <c:set var="className" value="${i == page ? 'selected' : ''}"/>
+                <c:set var="className" value="${i == page ? 'article-page-box__page-btn--selected' : ''}"/>
                 <a href="?page=${i}&searchKeyword=${param.searchKeyword}" class="${className}">${i}</a>
                 
                 <c:if test="${i == totalPage}">
