@@ -196,6 +196,27 @@ ALTER TABLE `attr` ADD COLUMN `expireDate` DATETIME NULL AFTER `value`;
 
 
 
+# 1번, 2번 회원의 이메일을 인증처리
+INSERT INTO attr
+SET regDate = NOW(),
+updateDate = NOW(),
+relTypeCode = 'member',
+relId = 1,
+typeCode = 'extra',
+type2Code = 'authedEmail',
+`value` = 'stj960215@gmail.com';
+
+INSERT INTO attr
+SET regDate = NOW(),
+updateDate = NOW(),
+relTypeCode = 'member',
+relId = 2,
+typeCode = 'extra',
+type2Code = 'authedEmail',
+`value` = 'stj960215@gmail.com';
+
+
+
 # 회원 테이블 조회
 SELECT * FROM `member`;
 
