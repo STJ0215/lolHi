@@ -28,7 +28,7 @@ public class Reply {
 	@JsonProperty("forPrintBody")
 	public String getForPrintBody() {
 		String bodyForPrint = HtmlUtils.htmlEscape(body);
-		bodyForPrint = bodyForPrint.replace("\n",  "<br>");
+		bodyForPrint = bodyForPrint.replace("\n", "<br>");
 		
 		return bodyForPrint;
 	}
